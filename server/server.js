@@ -15,7 +15,7 @@ app.use(
 );
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // Get Gemini API Response
 app.post("/chat-with-gemini", aiController);
