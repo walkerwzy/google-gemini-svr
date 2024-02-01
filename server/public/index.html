@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Gemini Chat</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">input</label>
+        <textarea class="form-control" id="exampleFormControlInput1" placeholder="please input"></textarea>
+      </div>
+      <!-- <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div> -->
+      <button type="button" class="btn btn-primary" id="btn">Submit</button>
+
+
+    <script src="/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript">
+$(function() {
+    $("#btn").on("click", () => {
+        const input = $('#exampleFormControlInput1').val();
+        console.log('request', input);
+        $.ajax({
+            url: '/chat-with-gemini',
+            type: 'POST',
+            data: {
+                prompt: input,
+                modelType: "text_only"
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>
