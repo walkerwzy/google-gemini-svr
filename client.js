@@ -4,7 +4,8 @@ const host = process.env.HOST;
 
 try {
     // fs方式转图片为base64
-    const filepath = '/Users/walker/Downloads/IMG_0010.jpg'
+    // const filepath = '/Users/walker/Downloads/IMG_0010.jpg'
+    const filepath = '/Users/walker/Downloads/3333.jpeg'
     await fs.access(filepath, fs.constants.R_OK)
     const image = await fs.readFile(filepath)
     const b64 = image.toString('base64')
@@ -27,9 +28,14 @@ try {
             "imageParts": parts
         }),
         headers: { "content-type": "application/json" },
+        verbose: true
     });
-    const body = await response.json();
-    console.log(body.result)
+    if (!response.ok) {
+        console.error(response.statusText);
+    } else {
+        const body = await response.json();
+        console.log(body.result)
+    }
 
 } catch (e) {
     console.error(e)
