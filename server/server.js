@@ -20,9 +20,13 @@ const app = express();
 //   })
 // )
 app.use(express.static(__dirname + '/public'));
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.bodyParser({limit: '50mb'}));
+// app.use(express.json());
+    // parse application/json
+    app.use(bodyParser.json({limit: '50mb'}));                        
+    // parse application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: true }));
+    // parse multipart/form-data
+    // app.use(multer());
 
 const PORT = process.env.PORT || 3000;
 
