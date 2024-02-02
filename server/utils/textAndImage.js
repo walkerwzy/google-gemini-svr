@@ -15,14 +15,16 @@ export const textAndImage = async (prompt, images) => {
   // prompt is a single string
   // imageParts is an array containing base64 strings of images
   let imageParts = [];
-  if (images[0].indexOf("http") === 0) {
+  const obj = images[0];
+  if (typeof obj === 'string' && obj.indexOf('http') === 0) {
     imageParts = await processImages(images);
   } else {
     imageParts = images.map((image) => {
-      return {
+      const type = image.type
+      return { 
         inlineData: {
-          data: image,
-          mimeType,
+          data: image.data,
+          type
         }
       };
     });

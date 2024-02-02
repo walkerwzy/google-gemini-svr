@@ -18,7 +18,7 @@ try {
     // const b64 = buffer.toString('base64')
 
     // const parts = ["https://img14.360buyimg.com/pop/jfs/t1/244246/4/4337/96061/65ba1678F9464813e/7e52c56b557e0a7f.jpg"]
-    const parts = [b64]
+    const parts = [{data:b64, type: "image/jpeg"}]
 
     const response = await fetch(`${host}/chat-with-gemini`, {
         method: 'POST',
@@ -32,6 +32,7 @@ try {
     });
     if (!response.ok) {
         console.error(response.statusText);
+        console.log(await response.text())
     } else {
         const body = await response.json();
         console.log(body.result)
