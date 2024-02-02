@@ -4,6 +4,9 @@ import { aiConfig } from "../config/aiConfig.js";
 
 const genAI = new GoogleGenerativeAI(aiConfig.gemini.apiKey);
 
+
+  // const generationConfig = { temperature: 0.9, topP: 1, topK: 1, maxOutputTokens: 4096 };
+
 // This function is used for a text only model of Gemini AI
 export const textOnly = async (prompt) => {
   const model = genAI.getGenerativeModel({

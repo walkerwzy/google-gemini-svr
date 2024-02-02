@@ -5,7 +5,7 @@ import { processImages } from "./processImages.js";
 
 const genAI = new GoogleGenerativeAI(aiConfig.gemini.apiKey);
 
-// This function is used for a text only model of Gemini AI
+// support image url or image file path
 export const textAndImage = async (prompt, images) => {
   const model = genAI.getGenerativeModel({
     model: aiConfig.gemini.textAndImageModel,
@@ -14,8 +14,19 @@ export const textAndImage = async (prompt, images) => {
 
   // prompt is a single string
   // imageParts is an array containing base64 strings of images
-
-  let imageParts = await processImages(images);
+  let imageParts = [];
+  if (images[0].indexOf("http") === 0) {
+    imageParts = await processImages(images);
+  } else {
+    imageParts = images.map((image) => {
+      return {
+        inlineData: {
+          data: image,
+          mimeType,
+        }
+      };
+    });
+  }
 
   try {
     const result = await model.generateContent([prompt, ...imageParts]);
