@@ -16,6 +16,7 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div> -->
       <button type="button" class="btn btn-primary" id="btn">Submit</button>
+      <p id="result"></p>
 
 
     <script src="/jquery-1.10.1.min.js"></script>
@@ -32,7 +33,7 @@ $(function() {
                 modelType: "text_only"
             },
             success: function(data) {
-                console.log(data);
+                $("#result").text(data.result);
             }
         });
     });
