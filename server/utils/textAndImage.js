@@ -20,11 +20,10 @@ export const textAndImage = async (prompt, images) => {
     imageParts = await processImages(images);
   } else {
     imageParts = images.map((image) => {
-      const type = image.type
       return { 
         inlineData: {
           data: image.data,
-          type
+          mimeType: image.type
         }
       };
     });
